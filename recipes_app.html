@@ -14,5 +14,26 @@
         <li><a href="recipes_app.html">Recipes</a></li>
     </ul>
 </nav>
+<div class="container">
+    <h1>Recipe App</h1>
+    <div id="search-container">
+        <input type="text" id="recipe-search" placeholder="Search for recipes...">
+        <button onclick="searchRecipes()">Search</button>
+    </div>
+    <div id="recipes-grid"></div>
+    <div id="recipe-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="recipe-details"></div>
+            <button id="add-to-favorites">Add to Favorites</button>
+        </div>
+    </div>
+    <div id="favorites-container">
+        <h2>Favorites</h2>
+        <div id="favorites"></div>
+    </div>
+</div>
+
+<script src="js/scripts_recipes.js"></script>
 </body>
 </html>
