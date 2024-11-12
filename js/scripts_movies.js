@@ -26,11 +26,12 @@ function displayMovies(movies) {
     movies.forEach(movie => {
         const movieCard = document.createElement('div');
         movieCard.className = 'movie-card';
+        movieCard.style.height = "400px"
         movieCard.innerHTML = `
             <img src="${imageBaseUrl}${movie.poster_path}" alt="${movie.title}">
             <div class="movie-info">
                 <div class="movie-title">${movie.title}</div>
-                <div>Release Date: ${movie.release_date}</div>
+                <div class="movie-release"> ${movie.release_date}</div>
             </div>
         `;
         movieCard.onclick = () => showMovieDetails(movie.id);
@@ -66,8 +67,36 @@ async function showMovieDetails(movieId) {
         document.querySelector('.close').onclick = () => {
             document.getElementById('movie-modal').style.display = 'none';
         };
+
+        const toggleWatchlistButton = document.getElementById('add-to-watchlist');
+        updateToggleButtonState(toggleWatchlistButton, movieId);
+
+        toggleWatchlistButton.onclick = () => {
+            toggleWatchlist(movieId);
+            updateToggleButtonState(toggleWatchlistButton, movieId);
+        };
     } catch (error) {
         console.error('Error:', error);
+    }
+}
+
+function toggleWatchlist(movieId) {
+    if (watchlist.includes(movieId)) {
+        removeFromWatchlist(movieId);
+    } else {
+        addToWatchlist(movieId);
+    }
+}
+
+function updateToggleButtonState(button, movieId) {
+    if (watchlist.includes(movieId)) {
+        button.textContent = 'Remove from Watchlist';
+        button.classList.add('remove');
+        button.classList.remove('add');
+    } else {
+        button.textContent = 'Add to Watchlist';
+        button.classList.add('add');
+        button.classList.remove('remove');
     }
 }
 
@@ -103,6 +132,11 @@ async function updateWatchlist() {
             const response = await fetch(url);
             const movie = await response.json();
             const movieElement = document.createElement('div');
+
+            movieElement.style.height = '150px';
+            movieElement.style.overflow = 'hidden';
+            movieElement.style.margin = '10px 0';
+
             movieElement.innerHTML = `
                 <img src="${imageBaseUrl}${movie.poster_path}" alt="${movie.title}" style="width: 100px; float: left; margin-right: 10px;">
                 <h3>${movie.title}</h3>
@@ -121,5 +155,4 @@ function removeFromWatchlist(movieId) {
     updateWatchlist();
 }
 
-// Initialize watchlist
 updateWatchlist();
