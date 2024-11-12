@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe App</title>
   <link rel="stylesheet" href="styles.css" type="text/css"/>
+  <script src="js/scripts_weather.js"></script>
 </head>
 <body class="recipes">
   <nav>
@@ -14,5 +15,14 @@
       <li><a href="recipes_app.html">Recipes</a></li>
     </ul>
   </nav>
+  <div id="search-container">
+    <input type="text" id="city-input" placeholder="Enter city name">
+    <button onclick="getWeather()">Search</button>
+    <button onclick="getCurrentLocation()">Use Current Location</button>
+  </div>
+  <div id="weather-container">
+    <div id="current-weather"></div>
+    <div id="forecast"></div>
+  </div>
 </body>
 </html>
