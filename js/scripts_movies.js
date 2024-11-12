@@ -2,7 +2,8 @@ const apiKey = '3fe664b8b79dfbf62b861479453a302d';
 const baseUrl = 'https://api.themoviedb.org/3';
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 let currentMovies = [];
-let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+let watchlist = JSON.parse(localStorage.getItem('watchlist'));
+
 
 async function searchMovies() {
     const query = document.getElementById('movie-search').value;
