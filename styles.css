@@ -228,3 +228,81 @@ button:hover {
         float: none;
     }
 }
+
+.recipes {
+    background-image: linear-gradient(45deg, #ebeaef, #e7e6eb);
+    background-attachment: fixed;
+    color: #1e1e1e;
+}
+.recipes ul {
+    background-image: linear-gradient(90deg, #84b00c, #648509);
+}
+.recipes button {
+    background-color: #84b00c;
+    color: white;
+    border-radius: 500px;
+}
+.recipes button:hover {
+    background-color: #648509;
+    transition: 0.1s;
+}
+#recipe-search {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+}
+#recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+.recipe-card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    cursor: pointer;
+}
+.recipe-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.recipe-info {
+    padding: 10px;
+}
+.recipe-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#recipe-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.recipes .modal-content {
+    background-color: white;
+}
+.recipes .modal-content ul {
+    flex-direction: column;
+    color: white;
+}
+.recipes .modal-content ul li {
+    font-size: 1.1rem;
+    font-weight: 400;
+    list-style: inside;
+}
+ol li {
+    font-size: 1rem;
+    font-weight: 400;
+    list-style: square;
+}
+#favorites-container {
+    margin-top: 20px;
+}
