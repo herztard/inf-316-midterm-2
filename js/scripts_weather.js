@@ -27,7 +27,7 @@ async function getWeather(lat, lon) {
             const container = document.getElementById('weather-container');
             const toggleSystemsButton = document.createElement('div');
             toggleSystemsButton.id = 'unit-toggle';
-            toggleSystemsButton.innerHTML = `<button style="width: 100%;" onclick="toggleUnit()">Toggle °C/°F</button>`;
+            toggleSystemsButton.innerHTML = `<button style="border: 2px solid #3e6bd0; width: 100%;" onclick="toggleUnit()">Toggle °C/°F</button>`;
             container.appendChild(toggleSystemsButton);
             container.style.display = "block";
             weatherDisplayed = true;
