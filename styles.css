@@ -166,6 +166,11 @@ button:hover {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 }
+#watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
 .movie-card {
     background-color: #24232c;
     border-radius: 5px;
@@ -209,7 +214,6 @@ button:hover {
 .movie-release {
     color: #aaa;
     text-align: center;
-
 }
 
 #movie-modal {
@@ -242,7 +246,7 @@ button:hover {
 
 #watchlist-container {
     margin-top: 20px;
-    align-items: start; /
+    align-items: start;
 }
 .modal-content img {
     float: left;

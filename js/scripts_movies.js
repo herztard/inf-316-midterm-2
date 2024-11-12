@@ -58,7 +58,7 @@ async function showMovieDetails(movieId) {
             <p>Cast: ${movie.credits.cast.slice(0, 5).map(actor => actor.name).join(', ')}</p>
             ${movie.videos.results.length > 0 ? `
                 <h3>Trailer</h3>
-                <iframe width="100%" height="auto" style="max-width: 560px; aspect-ratio: 16/9; margin-bottom: 36px;" src="https://www.youtube.com/embed/${movie.videos.results[0].key}" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="auto" style="max-width: 560px; aspect-ratio: 16/9; margin-bottom: 36px; margin-top: 36px" src="https://www.youtube.com/embed/${movie.videos.results[0].key}" frameborder="0" allowfullscreen></iframe>
             ` : ''}
             <button id="add-to-watchlist" onclick="addToWatchlist(${movie.id})">Add to Watchlist</button>
         `;
@@ -124,7 +124,7 @@ function addToWatchlist(movieId) {
 }
 
 async function updateWatchlist() {
-    const watchlistContainer = document.getElementById('watchlist');
+    const watchlistContainer = document.getElementById('watchlist-grid');
     watchlistContainer.innerHTML = '';
 
     for (const movieId of watchlist) {
@@ -133,17 +133,18 @@ async function updateWatchlist() {
             const response = await fetch(url);
             const movie = await response.json();
             const movieElement = document.createElement('div');
-
-            movieElement.style.height = '150px';
+            movieElement.className = 'movie-card';
+            movieElement.style.height = "400px"
             movieElement.style.overflow = 'hidden';
             movieElement.style.margin = '10px 0';
 
             movieElement.innerHTML = `
-                <img src="${imageBaseUrl}${movie.poster_path}" alt="${movie.title}" style="width: 100px; float: left; margin-right: 10px;">
+                <img src="${imageBaseUrl}${movie.poster_path}" alt="${movie.title}" style="width: 100%; height: 300px; object-fit: cover;">
                 <h3>${movie.title}</h3>
-                <button onclick="removeFromWatchlist(${movie.id})">Remove</button>
             `;
             watchlistContainer.appendChild(movieElement);
+            movieElement.onclick = () => showMovieDetails(movie.id);
+
         } catch (error) {
             console.error('Error:', error);
         }
