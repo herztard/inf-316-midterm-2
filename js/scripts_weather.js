@@ -1,8 +1,15 @@
 const apiKey = '7908168df347cd95a62e7df68d1fdc51';
 let unit = 'metric';
+let isCelsius = true;
 let weatherDisplayed = false;
 
 async function getWeather(lat, lon) {
+    if (isCelsius) {
+        unit = 'metric';
+    } else {
+        unit = 'imperial';
+    }
+
     const city = document.getElementById('city-input').value;
     let url;
     if (lat && lon) {
@@ -20,7 +27,7 @@ async function getWeather(lat, lon) {
             const container = document.getElementById('weather-container');
             const toggleSystemsButton = document.createElement('div');
             toggleSystemsButton.id = 'unit-toggle';
-            toggleSystemsButton.innerHTML = `<button style="border: 2px solid #3e6bd0; width: 100%;" onclick="toggleUnit()">Toggle °C/°F</button>`;
+            toggleSystemsButton.innerHTML = `<button style="width: 100%;" onclick="toggleUnit()">Toggle °C/°F</button>`;
             container.appendChild(toggleSystemsButton);
             container.style.display = "block";
             weatherDisplayed = true;
@@ -95,9 +102,21 @@ function getCurrentLocation() {
 }
 
 function toggleUnit() {
-    unit = unit === 'metric' ? 'imperial' : 'metric';
+    isCelsius = !isCelsius;
     const city = document.getElementById('city-input').value;
     if (city) {
         getWeather();
+    } else {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                getWeather(lat, lon);
+            },
+            (error) => {
+                console.error('Error:', error);
+                alert('Unable to retrieve your location');
+            }
+        );
     }
 }
