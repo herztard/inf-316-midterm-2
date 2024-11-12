@@ -66,10 +66,39 @@ async function showRecipeDetails(recipeId) {
         document.querySelector('.close').onclick = () => {
             document.getElementById('recipe-modal').style.display = 'none';
         };
+
+        const toggleFavoritesButton = document.getElementById('add-to-favorites');
+        updateToggleButtonState(toggleFavoritesButton, recipeId);
+
+        toggleFavoritesButton.onclick = () => {
+            toggleRecipe(recipeId);
+            updateToggleButtonState(toggleFavoritesButton, recipeId);
+        };
     } catch (error) {
         console.error('Error:', error);
     }
 }
+
+function toggleRecipe(recipeId) {
+    if (favorites.includes(recipeId)) {
+        removeFromFavorites(recipeId);
+    } else {
+        addToFavorites(recipeId);
+    }
+}
+
+function updateToggleButtonState(button, movieId) {
+    if (favorites.includes(movieId)) {
+        button.textContent = 'Remove from Favorites';
+        button.classList.add('remove');
+        button.classList.remove('add');
+    } else {
+        button.textContent = 'Add to Favorites';
+        button.classList.add('add');
+        button.classList.remove('remove');
+    }
+}
+
 
 function getNutritionalInfo(recipe) {
     if (recipe.nutrition && recipe.nutrition.nutrients) {
