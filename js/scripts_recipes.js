@@ -1,4 +1,4 @@
-const apiKey = '5e01484a6bda416bb3c073c146e493e4';
+const apiKey = 'bb4bce81a58e40d5afa4cf14e20baedf';
 const baseUrl = 'https://api.spoonacular.com/recipes';
 let currentRecipes = [];
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -128,7 +128,7 @@ function addToFavorites(recipeId) {
 }
 
 async function updateFavorites() {
-    const favoritesContainer = document.getElementById('favorites');
+    const favoritesContainer = document.getElementById('favorites-grid');
     favoritesContainer.innerHTML = '';
 
     for (const recipeId of favorites) {
@@ -137,12 +137,15 @@ async function updateFavorites() {
             const response = await fetch(url);
             const recipe = await response.json();
             const recipeElement = document.createElement('div');
+            recipeElement.className = 'recipe-card';
+
             recipeElement.innerHTML = `
-                <img src="${recipe.image}" alt="${recipe.title}" style="width: 100px; float: left; margin-right: 10px;">
+                <img src="${recipe.image}" alt="${recipe.title}" style="width: 100%">
                 <h3>${recipe.title}</h3>
-                <button onclick="removeFromFavorites(${recipe.id})">Remove</button>
             `;
             favoritesContainer.appendChild(recipeElement);
+            recipeElement.onclick = () => showRecipeDetails(recipe.id);
+
         } catch (error) {
             console.error('Error:', error);
         }
